@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Buy cool new product</title>
+  </head>
+  <body>
+    {% if not items %}
+    <h1>Ваша корзина пуста....</h1>
+    {% elif items %}
+    <header>
+      <h1>Оплата заказа под номером {{order.id}}:</h1>
+    </header>
+    <main>
+      <article>
+        <section>
+          <h2>Содержимое:</h2>
+          {% for item in items%}
+              <p>{{item.item}} - в количестве {{item.quantity}}</p>
+          {% endfor %}
+          <p> Итоговая сумма: {{order.total_sum}} {{order.currency}}</p>
+          {% if discount %}
+            <p> У вас есть купон на скидку в {{discount}} %</p>
+          {% endif %}
+        <a href="{% url 'stripe_id' order.id %}">Нажми, чтобы купить</a>
+        </section>
+      </article>
+    </main>
+    {% endif %}
+  </body>
+</html>
