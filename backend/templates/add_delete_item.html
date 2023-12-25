@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {% if not order_id %}
+    <h1>Корзина с указанным номером не найдена...</h1>
+    <a href="{% url 'items' %}">Перейти обратно к товарам</a>
+    {% elif add %}
+    <h1>Товар успешно добавлен</h1>
+    <a href="{% url 'items' %}">Продолжить покупки</a>
+    <p><a href="{% url 'order' order_id %}">Перейти в корзину</a></p>
+    {% else %}
+    <h1>Товар успешно удален из корзины</h1>
+    <a href="{% url 'items' %}">Продолжить покупки</a>
+    <p><a href="{% url 'order' order_id %}">Перейти обратно в корзину</a></p>
+    {% endif %}
+    </main>
+  </body>
+</html>

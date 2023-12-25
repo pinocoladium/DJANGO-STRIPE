@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Товары</title>
+  </head>
+  <body>
+    {% if not items %}
+    <h1>Товаров в продаже нет...</h1>
+    {% elif items %}
+    <header>
+      <h1>В продаже сейчас {{count}} товара</h1>
+    </header>
+    <main>
+      <article>
+        <section>
+          <h2>Можно купить:</h2>
+          {% for item in items%}
+            <h3>Позиция:</h3>
+              <p>{{item.name}} - описание: {{item.description}}</p>
+              <p>цена: {{item.price}}</p>
+                <form action="{% url 'add_item' item.id %}" method="get">
+                  {{form.as_p}}
+                  <button type="submit">Добавить в корзину</button>
+                </form>
+          {% endfor %}
+        </section>
+      </article>
+    </main>
+    {% endif %}
+  </body>
+</html>

@@ -17,12 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from backend.views import OrderBuy, StripeSession, cancel, success
+from backend.views import (add_item, cancel, delete_item, get_items,
+                           get_order_buy, get_stripe_session, success)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("buy/<int:id>/", StripeSession.as_view(), name="stripe_id"),
-    path("order/<int:id>/", OrderBuy.as_view(), name="order"),
+    path("buy/<int:id>/", get_stripe_session, name="stripe_id"),
+    path("order/<int:id>/", get_order_buy, name="order"),
+    path("items/all/", get_items, name="items"),
+    path("order/add/<int:id>/", add_item, name="add_item"),
+    path("order/delete/<int:order_id>/<int:item_id>/", delete_item, name="delete_item"),
     path("success/", success, name="success"),
     path("cancel/", cancel, name="cancel"),
 ]

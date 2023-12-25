@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Buy cool new product</title>
+    <title>Корзина</title>
   </head>
   <body>
     {% if not items %}
     <h1>Ваша корзина пуста....</h1>
+    <p><a href="{% url 'items' %}">Вернутся к списку товаров</a></p>
     {% elif items %}
     <header>
       <h1>Оплата заказа под номером {{order.id}}:</h1>
@@ -15,13 +16,15 @@
         <section>
           <h2>Содержимое:</h2>
           {% for item in items%}
-              <p>{{item.item}} - в количестве {{item.quantity}}</p>
+              <p>{{item.item}} - в количестве {{item.quantity}}
+              <a href="{% url 'delete_item' order.id item.id  %}">(Удалить)</a></p>
           {% endfor %}
           <p> Итоговая сумма: {{order.total_sum}} {{order.currency}}</p>
           {% if discount %}
             <p> У вас есть купон на скидку в {{discount}} %</p>
           {% endif %}
         <a href="{% url 'stripe_id' order.id %}">Нажми, чтобы купить</a>
+        <p><a href="{% url 'items' %}">Вернутся к списку товаров</a></p>
         </section>
       </article>
     </main>
